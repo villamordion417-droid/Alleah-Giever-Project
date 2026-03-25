@@ -1,0 +1,17 @@
+{% extends 'journal/base.html' %}
+
+{% block content %}
+    <h1>Your Journal Entries 🌟</h1>
+    <a href="{% url 'create_entry' %}" class="btn">Write a New Entry ✍️</a>
+    {% for entry in entries %}
+        <div class="entry">
+            {% if entry.title %}
+                <h2>{{ entry.title }}</h2>
+            {% endif %}
+            <p class="timestamp">{{ entry.created_at|date:"F j, Y, g:i a" }}</p>
+            <p class="content">{{ entry.content|linebreaks }}</p>
+        </div>
+    {% empty %}
+        <p>No entries yet. Start writing! 📝</p>
+    {% endfor %}
+{% endblock %}
